@@ -36,19 +36,23 @@ class RobotPainter():
             print 'x and y are not at the same length'
         if z is None:
             z = np.zeros(len(x))
+        if q_x is None:
             q_x = np.zeros(len(x))
+        if q_y is None:
             q_y = np.zeros(len(x))
+        if q_z is None:
             q_z = np.zeros(len(x))
+        if q_w is None:
             q_w = np.ones(len(x))
 
-            poses_list = []
-            for n in range(len(x)):
-                # Point = {'x':x[n], 'y':y[n], 'z':z[n]}
-                # Quaternion = {'x': q_x[n], 'y': q_y[n], 'z': q_z[n], 'w': q_w[n]}
-                Point = {'x': np.float64(x[n]).item(), 'y': np.float64(y[n]).item(), 'z': np.float64(z[n]).item()}
-                Quaternion = {'x': np.float64(q_x[n]).item(), 'y': np.float64(q_y[n]).item(), 'z': np.float64(q_z[n]).item(), 'w': np.float64(q_w[n]).item()}
-                Pose = {'position': Point, 'orientation': Quaternion}
-                poses_list.append(Pose)
+        poses_list = []
+        for n in range(len(x)):
+            # Point = {'x':x[n], 'y':y[n], 'z':z[n]}
+            # Quaternion = {'x': q_x[n], 'y': q_y[n], 'z': q_z[n], 'w': q_w[n]}
+            Point = {'x': np.float64(x[n]).item(), 'y': np.float64(y[n]).item(), 'z': np.float64(z[n]).item()}
+            Quaternion = {'x': np.float64(q_x[n]).item(), 'y': np.float64(q_y[n]).item(), 'z': np.float64(q_z[n]).item(), 'w': np.float64(q_w[n]).item()}
+            Pose = {'position': Point, 'orientation': Quaternion}
+            poses_list.append(Pose)
         eval_promise = self.robot.movePathSafe(poses_list)
         result = eval_promise.wait()
         return result
