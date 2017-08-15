@@ -31,6 +31,14 @@ class RobotPainter():
         eval_promise = self.robot.dipSlotPaint(index)
         result = eval_promise.wait()
 
+    def home_pose(self):
+        eval_promise = self.robot.moveMacro('homePose')
+        result = eval_promise.wait()
+
+    def hide_pose(self):
+        eval_promise = self.robot.moveMacro('hidePose')
+        result = eval_promise.wait()
+
     def move_pose_safe(self, x, y, z=None, q_x=None, q_y=None, q_z=None, q_w=None):
         if len(x) != len(y):
             print 'x and y are not at the same length'
@@ -74,14 +82,14 @@ class Camera():
         result = eval_promise.wait()
         return result
 
-    def get_png(self):
+    def get_png(self, filename = 'test.png'):
         eval_promise = self.camera.get()
         result = eval_promise.wait()
         img_dict = result.picture.to_dict()
         png_str = img_dict['png']
-        with open("test.png", "wb") as file:
+        with open(filename, "wb") as file:
             file.write(png_str)
-        png = mpimg.imread('test.png')
+        png = mpimg.imread(filename)
         return png
 
     def get_resolution(self):
