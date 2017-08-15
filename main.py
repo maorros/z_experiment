@@ -83,10 +83,12 @@ for i in range(col):
 
 plt.figure()
 plt.plot(z,brush_width)
+plt.title('Brush width as a function of Z')
 plt.pause(5)
 
 plt.figure()
 plt.plot(z,stroke_length)
+plt.title('Stroke wength as a function of Z')
 plt.pause(10)
 
 #
