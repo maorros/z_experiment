@@ -41,10 +41,10 @@ class Grid:
 
     def grid_to_camera_rect(self, grid_i, grid_j):
         x_vec, y_vec = self.grid_to_camera_cord([0, self.grid_len_x], [0, self.grid_len_y], grid_i, grid_j)
-        x = x_vec[0]
-        y = y_vec[0]
-        w = x_vec[1] - x_vec[0]
-        h = y_vec[1] - y_vec[0]
+        x = int(x_vec[0])
+        y = int(y_vec[0])
+        w = int(x_vec[1] - x_vec[0])
+        h = int(y_vec[1] - y_vec[0])
         return x,y,w,h
 
 
