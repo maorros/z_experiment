@@ -95,7 +95,7 @@ class Camera():
     def get_resolution(self):
         eval_promise = self.camera.imageResolution()
         result = eval_promise.wait()
-        print ('width: ', result.size.width, 'height: ', result.size.height)
+        print ('pic_size','width: ', result.size.width, 'height: ', result.size.height)
         return result.size
 
 
