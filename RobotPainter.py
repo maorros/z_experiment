@@ -39,7 +39,7 @@ class RobotPainter():
         eval_promise = self.robot.moveMacro('hidePose')
         result = eval_promise.wait()
 
-    def move_pose_safe(self, x, y, z=None, q_x=None, q_y=None, q_z=None, q_w=None):
+    def move_pose_safe(self, x, y, z=None, q_x=None, q_y=None, q_z=None, q_w=None, v=None):
         if len(x) != len(y):
             print 'x and y are not at the same length'
         if z is None:
@@ -52,6 +52,8 @@ class RobotPainter():
             q_z = np.zeros(len(x))
         if q_w is None:
             q_w = np.ones(len(x))
+        if v is None:
+            v = 0.5*np.ones(len(x))
 
         poses_list = []
         for n in range(len(x)):
@@ -59,7 +61,7 @@ class RobotPainter():
             # Quaternion = {'x': q_x[n], 'y': q_y[n], 'z': q_z[n], 'w': q_w[n]}
             Point = {'x': np.float64(x[n]).item(), 'y': np.float64(y[n]).item(), 'z': np.float64(z[n]).item()}
             Quaternion = {'x': np.float64(q_x[n]).item(), 'y': np.float64(q_y[n]).item(), 'z': np.float64(q_z[n]).item(), 'w': np.float64(q_w[n]).item()}
-            Pose = {'position': Point, 'orientation': Quaternion}
+            Pose = {'position': Point, 'orientation': Quaternion, 'velocity' : np.float64(v[n]).item()}
             poses_list.append(Pose)
         eval_promise = self.robot.movePathSafe(poses_list)
         result = eval_promise.wait()
