@@ -3,6 +3,27 @@ import numpy as np
 import matplotlib.image as mpimg
 import matplotlib.pyplot as plt
 
+#
+# This class enables interaction with the robot or the simulation.
+#
+# This class requires that FeedbackCamera.capnp and RobotService.capnp will be at the same directory.
+#
+#  in order to initialize the connection do the following:
+#
+# from RobotPainter import *
+#
+# robot = RobotPainter()
+# robot.init('134.34.231.221:33333')
+# robot.start()
+#
+# In order to initiate the camera do:
+#
+# vis = Camera()
+# vis.init('134.34.231.221:55555')
+#
+
+
+
 class RobotPainter():
     service = None
     client = None
